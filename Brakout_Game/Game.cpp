@@ -14,6 +14,8 @@ bool Game::init(const char* _title, int _screenWidth, int _screenHeight) {
 		std::cerr << "Error al inicializar la ventana" << std::endl;
 		return false;
 	}
+	running = true;
+	return true;
 }
 
 void Game::handleEvents() {

@@ -36,25 +36,18 @@ SDL_Renderer* Window::getRenderer(){
 }
 
 void Window::clear() {
-	if (renderer) {
-		SDL_RenderClear(renderer);
-	}
-	else {
-		std::cerr << "Error: renderer es un puntero nulo." << std::endl;
-	}
+
+	SDL_RenderClear(renderer);
 }
 
 void Window::present() {
-	if (renderer) {
-		SDL_RenderPresent(renderer);
-	}
-	else {
-		std::cerr << "Error: renderer es un puntero nulo." << std::endl;
-	}
+	SDL_RenderPresent(renderer);
 }
 
-void Window::clean() { 
-	if (renderer) SDL_DestroyRenderer(renderer);
-	if (window) SDL_DestroyWindow(window);
+void Window::clean() {
+	SDL_DestroyRenderer(renderer);
+	SDL_DestroyWindow(window);
+
 	SDL_Quit();
+	
 }
