@@ -33,10 +33,11 @@ void Game::update() {
 }
 
 void Game::render() {
-	window->clear();
-	//Aquí irá el código para renderizar los objetos.
-
-	window->present();
+	if (window) {
+		window->clear();
+		// Aquí irá el código para renderizar los objetos.
+		window->present();
+	}
 }
 
 bool Game::isRunning() const {
@@ -47,6 +48,5 @@ bool Game::isRunning() const {
 void Game::clean() {
 	if (window) {
 		window->clean();
-		delete window;
 	}
 }

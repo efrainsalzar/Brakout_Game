@@ -1,12 +1,16 @@
 #include "Window.h"
+#include <iostream>
 
-Window::Window(const char* _title, int _screenWidth, int _screenHeight):
+Window::Window(const char* _title, int _screenWidth, int _screenHeight) :
 	window(nullptr),
-	renderer(nullptr), 
-	screenWidth(_screenWidth), 
-	screenHeight(_screenHeight) {}
+	renderer(nullptr),
+	screenWidth(_screenWidth),
+	screenHeight(_screenHeight) {
+	std::cout << "Window constructor called" << std::endl;
+}
 
 Window::~Window() {
+	std::cout << "Window destructor called" << std::endl;
 	clean();
 }
 
@@ -19,35 +23,48 @@ bool Window::create() {
 	window = SDL_CreateWindow("Breakout", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, screenWidth, screenHeight, SDL_WINDOW_SHOWN);
 	if (!window) {
 		std::cerr << "Error al crear la ventana: " << SDL_GetError() << std::endl;
+		SDL_Quit();
 		return false;
 	}
 
 	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 	if (!renderer) {
 		std::cerr << "Error al crear el renderizador: " << SDL_GetError() << std::endl;
+		SDL_DestroyWindow(window);
+		SDL_Quit();
 		return false;
 	}
 
 	return true;
 }
 
-SDL_Renderer* Window::getRenderer(){
+SDL_Renderer* Window::getRenderer() {
+	if (renderer == nullptr) {
+		std::cerr << "Error: puntero renderer nulo" << std::endl;
+	}
 	return renderer;
 }
 
 void Window::clear() {
-
-	SDL_RenderClear(renderer);
+	if (renderer) {
+		SDL_RenderClear(renderer);
+	}
+	else {
+		std::cerr << "Error: renderer es un puntero nulo en clear()." << std::endl;
+	}
 }
 
 void Window::present() {
-	SDL_RenderPresent(renderer);
+	if (renderer) {
+		SDL_RenderPresent(renderer);
+	}
+	else {
+		std::cerr << "Error: renderer es un puntero nulo." << std::endl;
+	}
 }
 
 void Window::clean() {
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
-
 	SDL_Quit();
-	
 }
