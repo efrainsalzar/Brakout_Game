@@ -1,11 +1,14 @@
 #pragma once
 #include "Window.h"
+#include "Panddle.h"
 
 class Game
 {
 private:
 	Window* window;
 	bool running;
+
+	Panddle* panddle;
 
 public:
 	Game();

@@ -6,7 +6,7 @@ Window::Window(const char* _title, int _screenWidth, int _screenHeight) :
 	renderer(nullptr),
 	screenWidth(_screenWidth),
 	screenHeight(_screenHeight) {
-	std::cout << "Window constructor called" << std::endl;
+	//std::cout << "Window constructor called" << std::endl;
 }
 
 Window::~Window() {
@@ -47,6 +47,7 @@ SDL_Renderer* Window::getRenderer() {
 
 void Window::clear() {
 	if (renderer) {
+		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 		SDL_RenderClear(renderer);
 	}
 	else {

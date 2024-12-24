@@ -2,9 +2,11 @@
 
 Game::Game(): 
 	window(nullptr),
+	panddle(nullptr),
 	running(false) { }
 
 Game::~Game() {
+	std::cout << "Game destructor called" << std::endl;
 	clean();
 }
 
@@ -14,6 +16,8 @@ bool Game::init(const char* _title, int _screenWidth, int _screenHeight) {
 		std::cerr << "Error al inicializar la ventana" << std::endl;
 		return false;
 	}
+
+	panddle = new Panddle(400, 500, 100, 20, 5, 3, { 255, 0, 0, 255 });
 	running = true;
 	return true;
 }
@@ -29,13 +33,15 @@ void Game::handleEvents() {
 
 void Game::update() {
 	//Aquí irá la lógica del juego más adelante.
-
+	panddle->update();
 }
 
 void Game::render() {
 	if (window) {
 		window->clear();
 		// Aquí irá el código para renderizar los objetos.
+		panddle->render(window->getRenderer()); // Renderizamos la barra
+		
 		window->present();
 	}
 }
@@ -46,7 +52,6 @@ bool Game::isRunning() const {
 
 // Limpieza de recursos ---------------------------------
 void Game::clean() {
-	if (window) {
-		window->clean();
-	}
+	delete window;
+	delete panddle;
 }
