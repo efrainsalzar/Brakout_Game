@@ -6,7 +6,7 @@ int main(int argc, char* argv[]) {
 
 	Game game;
 
-	if (!game.init("Breackout", 800, 600)) {
+	if (!game.init()) {
 		return -1;
 	}
 

@@ -1,12 +1,23 @@
 #include "Panddle.h"
 
-Panddle::Panddle(int _x, int _y, int _width, int _height, int _speed, int _lives, SDL_Color _color) :
-    GameObject(_x, _y, _width, _height), 
-    speed(_speed), 
-    lives(_lives), 
-    color(_color)
+Panddle::Panddle(int _x, int _y, int _width, int _height, int _speed, SDL_Color _color, int _lives) :
+    GameObject(_x, _y, _width, _height,_speed, _color),
+    lives(_lives)
+    
 {
     // El constructor ya maneja la inicialización de los valores pasados como parámetros
+	
+    bodyObject = { _x, _y, _width, _height };
+    movimiento = new Movimiento(&bodyObject);
+}
+
+Panddle::Panddle():
+
+	GameObject(400, 500, 100, 20, 5, { 42, 255, 100, 255 }),
+	lives(3)
+{
+	// El constructor ya maneja la inicialización de los valores pasados como parámetros
+	movimiento = new Movimiento(&bodyObject);
 }
 
 Panddle::~Panddle() {
@@ -14,21 +25,23 @@ Panddle::~Panddle() {
 }
 
 void Panddle::update() {
-    // Actualiza la posición basada en la entrada del usuario
-    const Uint8* currentKeyStates = SDL_GetKeyboardState(NULL);
-    if (currentKeyStates[SDL_SCANCODE_LEFT]) // Mover hacia la izquierda
-        x -= speed;
-    if (currentKeyStates[SDL_SCANCODE_RIGHT]) // Mover hacia la derecha
-        x += speed;
+    // Manejar entrada del usuario
+    const Uint8* state = SDL_GetKeyboardState(nullptr);
 
-    // Limitar el movimiento para que no salga de la pantalla
-    if (x < 0)
-        x = 0;
-    if (x + width > 800) // Supongamos que el ancho de la ventana es 800
-        x = 800 - width;
+    if (state[SDL_SCANCODE_LEFT]) {
+        movimiento->mover(Movimiento::Direccion::IZQUIERDA, speed);
+    }
+    if (state[SDL_SCANCODE_RIGHT]) {
+        movimiento->mover(Movimiento::Direccion::DERECHA,speed);
+    }
 
-    // Actualizamos el rectángulo del cuerpo
-    bodyObject = { x, y, width, height };
+    // Verificar los límites de la pantalla
+    if (bodyObject.x < 0) {
+        bodyObject.x = 0; // Límite izquierdo
+    }
+    if (bodyObject.x + bodyObject.w > 800) {
+        bodyObject.x = 800 - bodyObject.w; // Límite derecho
+    }
 }
 
 void Panddle::render(SDL_Renderer* _renderer) {

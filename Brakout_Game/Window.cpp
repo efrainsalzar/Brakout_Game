@@ -1,11 +1,21 @@
 #include "Window.h"
 #include <iostream>
 
-Window::Window(const char* _title, int _screenWidth, int _screenHeight) :
+Window::Window(std::string _title, int _screenWidth, int _screenHeight) :
 	window(nullptr),
 	renderer(nullptr),
+	title(_title),
 	screenWidth(_screenWidth),
 	screenHeight(_screenHeight) {
+	//std::cout << "Window constructor called" << std::endl;
+}
+
+Window::Window() :
+	window(nullptr),
+	renderer(nullptr),
+	title("Breackout"),
+	screenWidth(800),
+	screenHeight(600) {
 	//std::cout << "Window constructor called" << std::endl;
 }
 

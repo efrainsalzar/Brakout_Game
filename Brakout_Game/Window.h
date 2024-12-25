@@ -2,6 +2,7 @@
 
 #include <SDL.h>
 #include <iostream>
+#include <string>
 
 class Window
 {
@@ -9,12 +10,14 @@ private:
 	SDL_Window* window;
 	SDL_Renderer* renderer;
 
+	std::string title;
 	int screenWidth;
 	int screenHeight;
 
 public:
 
-	Window(const char* _title, int _screenWidth, int _screenHeight);
+	Window(std::string _title, int _screenWidth, int _screenHeight);
+	Window();	
 	~Window();
 
 	bool create(); //crea la ventana wondows

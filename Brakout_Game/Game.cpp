@@ -10,14 +10,15 @@ Game::~Game() {
 	clean();
 }
 
-bool Game::init(const char* _title, int _screenWidth, int _screenHeight) {
-	window = new Window(_title, _screenWidth, _screenHeight);
+bool Game::init() {
+	window = new Window();
 	if (!window->create()) {
 		std::cerr << "Error al inicializar la ventana" << std::endl;
 		return false;
 	}
 
-	panddle = new Panddle(400, 500, 100, 20, 5, 3, { 255, 0, 0, 255 });
+	panddle = new Panddle();
+	ball = new  Ball();
 	running = true;
 	return true;
 }
@@ -34,6 +35,7 @@ void Game::handleEvents() {
 void Game::update() {
 	//Aquí irá la lógica del juego más adelante.
 	panddle->update();
+	ball->update();
 }
 
 void Game::render() {
@@ -41,6 +43,7 @@ void Game::render() {
 		window->clear();
 		// Aquí irá el código para renderizar los objetos.
 		panddle->render(window->getRenderer()); // Renderizamos la barra
+		ball->render(window->getRenderer()); // Renderizamos la bola
 		
 		window->present();
 	}
@@ -54,4 +57,5 @@ bool Game::isRunning() const {
 void Game::clean() {
 	delete window;
 	delete panddle;
+	delete ball;
 }
