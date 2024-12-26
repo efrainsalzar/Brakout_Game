@@ -1,22 +1,27 @@
 #include "Window.h"
 #include <iostream>
 
+Window* Window::instance = nullptr;
+
 Window::Window(std::string _title, int _screenWidth, int _screenHeight) :
 	window(nullptr),
 	renderer(nullptr),
 	title(_title),
 	screenWidth(_screenWidth),
 	screenHeight(_screenHeight) {
-	//std::cout << "Window constructor called" << std::endl;
+	std::cout << "Window constructor called witch parents" << std::endl;
+	instance = this;
 }
 
 Window::Window() :
+	
 	window(nullptr),
 	renderer(nullptr),
 	title("Breackout"),
 	screenWidth(800),
 	screenHeight(600) {
-	//std::cout << "Window constructor called" << std::endl;
+	std::cout << "Window constructor called s/n parents" << std::endl;
+	instance = this;
 }
 
 Window::~Window() {
@@ -78,4 +83,12 @@ void Window::clean() {
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
 	SDL_Quit();
+}
+
+Window* Window::getInstance()
+{
+	if (instance == nullptr) {
+		instance = new Window();  // Crear la instancia si no existe
+	}
+	return instance;
 }

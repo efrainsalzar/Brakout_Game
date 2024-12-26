@@ -19,6 +19,8 @@ public:
 	void update() override;
 	void render(SDL_Renderer* _renderer) override;
 
+	//void drawCircle(SDL_Renderer* renderer, int centerX, int centerY, int radius, SDL_Color color);
+
 	enum class Choque
 	{
 		ARRIBA,

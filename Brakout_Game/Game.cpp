@@ -11,7 +11,7 @@ Game::~Game() {
 }
 
 bool Game::init() {
-	window = new Window();
+	window = Window::getInstance();
 	if (!window->create()) {
 		std::cerr << "Error al inicializar la ventana" << std::endl;
 		return false;
@@ -36,6 +36,13 @@ void Game::update() {
 	//Aquí irá la lógica del juego más adelante.
 	panddle->update();
 	ball->update();
+
+	// Colisión entre bola y panddle
+	CollisionManager  colision;
+	if (colision.checkCollision(ball, panddle)) {
+		//std::cout << "Colisión detectada entre bola y panddle" << std::endl;
+		//CollisionManager::handleCollision(ball, panddle);
+	}
 }
 
 void Game::render() {
@@ -44,6 +51,7 @@ void Game::render() {
 		// Aquí irá el código para renderizar los objetos.
 		panddle->render(window->getRenderer()); // Renderizamos la barra
 		ball->render(window->getRenderer()); // Renderizamos la bola
+		//ball->drawCircle(window->getRenderer(), ball->getX(), ball->getY(), ball->getWidth(), ball->getColor());
 		
 		window->present();
 	}
@@ -55,7 +63,7 @@ bool Game::isRunning() const {
 
 // Limpieza de recursos ---------------------------------
 void Game::clean() {
-	delete window;
+	//delete window;
 	delete panddle;
 	delete ball;
 }

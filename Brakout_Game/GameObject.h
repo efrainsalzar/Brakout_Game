@@ -1,12 +1,13 @@
 #pragma once
 #include <SDL.h>
 #include <iostream>	
+#include "Window.h"
 class GameObject
 {
 private:
 	
 protected:
-	SDL_Rect bodyObject;
+	SDL_Rect* bodyObject;
 	SDL_Renderer* renderer;
 	int x;
 	int y;
@@ -24,10 +25,10 @@ public:
 	virtual void render(SDL_Renderer* _renderer) = 0;
 
 	//Metodo de acceso
-	int getX() const { return x; }
-	int getY() const { return y; }
-	int getWidth() const { return width; }
-	int getHeight() const { return height; }
+	int getX() const { return bodyObject->x; }
+	int getY() const { return bodyObject->y; }
+	int getWidth() const { return bodyObject->w; }
+	int getHeight() const { return bodyObject->h; }
 	int getSpeed() const { return speed; }
 	SDL_Color getColor() const { return color; }
 

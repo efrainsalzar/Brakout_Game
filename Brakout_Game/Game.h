@@ -2,6 +2,7 @@
 #include "Window.h"
 #include "Panddle.h"
 #include "Ball.h"
+#include "CollisionManager.h"
 
 class Game
 {

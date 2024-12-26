@@ -6,9 +6,7 @@ Panddle::Panddle(int _x, int _y, int _width, int _height, int _speed, SDL_Color 
     
 {
     // El constructor ya maneja la inicialización de los valores pasados como parámetros
-	
-    bodyObject = { _x, _y, _width, _height };
-    movimiento = new Movimiento(&bodyObject);
+    movimiento = new Movimiento(bodyObject);
 }
 
 Panddle::Panddle():
@@ -17,7 +15,7 @@ Panddle::Panddle():
 	lives(3)
 {
 	// El constructor ya maneja la inicialización de los valores pasados como parámetros
-	movimiento = new Movimiento(&bodyObject);
+	movimiento = new Movimiento(bodyObject);
 }
 
 Panddle::~Panddle() {
@@ -36,16 +34,16 @@ void Panddle::update() {
     }
 
     // Verificar los límites de la pantalla
-    if (bodyObject.x < 0) {
-        bodyObject.x = 0; // Límite izquierdo
+    if (bodyObject->x < 0) {
+        bodyObject->x = 0; // Límite izquierdo
     }
-    if (bodyObject.x + bodyObject.w > 800) {
-        bodyObject.x = 800 - bodyObject.w; // Límite derecho
+    if (bodyObject->x + bodyObject->w > 800) {
+        bodyObject->x = 800 - bodyObject->w; // Límite derecho
     }
 }
 
 void Panddle::render(SDL_Renderer* _renderer) {
     // Dibuja la barra en pantalla con el color especificado
     SDL_SetRenderDrawColor(_renderer, color.r, color.g, color.b, color.a); // Usar el color de la barra
-    SDL_RenderFillRect(_renderer, &bodyObject); // Dibuja el rectángulo
+    SDL_RenderFillRect(_renderer, bodyObject); // Dibuja el rectángulo
 }

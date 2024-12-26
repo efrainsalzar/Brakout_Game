@@ -5,9 +5,10 @@ GameObject::GameObject(int _x, int _y, int _width, int _height, int _speed, SDL_
 	width(_width),
 	height(_height),
 	speed(_speed),
-	color(_color),
-	bodyObject{_x, _y, _width, _height } {
+	color(_color) {
+	bodyObject = new SDL_Rect{ x, y, width, height };
 }
 
 GameObject::~GameObject() {
+	delete bodyObject;
 }
