@@ -10,9 +10,14 @@ Panddle::Panddle(int _x, int _y, int _width, int _height, int _speed, SDL_Color 
 }
 
 Panddle::Panddle():
+    GameObject(400, // Posición en X
+    530, // Posición en Y
+    100, // Ancho
+    15,  // Alto
+    5,   // Velocidad
+    { 42, 255, 100, 255 }), // Color (RGBA)
+    lives(3) // Inicializa el número de vidas
 
-	GameObject(400, 500, 100, 20, 5, { 42, 255, 100, 255 }),
-	lives(3)
 {
 	// El constructor ya maneja la inicialización de los valores pasados como parámetros
 	movimiento = new Movimiento(bodyObject);

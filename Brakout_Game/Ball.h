@@ -21,13 +21,7 @@ public:
 
 	//void drawCircle(SDL_Renderer* renderer, int centerX, int centerY, int radius, SDL_Color color);
 
-	enum class Choque
-	{
-		ARRIBA,
-		ABAJO,
-		IZQUIERDA,
-		DERECHA
-	};
 
-	void rebote(Movimiento::Direccion _direccion, Choque _choque);
+
+
 };

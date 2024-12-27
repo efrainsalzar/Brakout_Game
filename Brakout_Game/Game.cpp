@@ -41,7 +41,7 @@ void Game::update() {
 	CollisionManager  colision;
 	if (colision.checkCollision(ball, panddle)) {
 		//std::cout << "Colisión detectada entre bola y panddle" << std::endl;
-		//CollisionManager::handleCollision(ball, panddle);
+		//colision.handleCollision(ball, panddle);
 	}
 }
 
