@@ -1,14 +1,14 @@
 #pragma once
 #include "GameObject.h" // Asegúrate de que esta clase esté definida correctamente
 #include <iostream>
-#include "Panddle.h"
+#include "Paddle.h"
 #include "Ball.h"
 #include "Movimiento.h"
 class CollisionManager
 {
 private:
 	Ball* ball;
-	Panddle* panddle;
+	Paddle* panddle;
     Movimiento* movimiento;
 
     bool collisionY;

@@ -1,17 +1,22 @@
 #pragma once
 #include "Window.h"
-#include "Panddle.h"
+#include "GameObject.h"
+
+#include "Paddle.h"
 #include "Ball.h"
+#include "Brick.h"
 #include "CollisionManager.h"
+
+#include <vector>
 
 class Game
 {
 private:
 	Window* window;
 	bool running;
+	SDL_Event event;
 
-	Panddle* panddle; // Barra del jugador
-	Ball* ball; // Bola del juego
+	std::vector<GameObject*> gameObjects;
 
 public:
 	Game();

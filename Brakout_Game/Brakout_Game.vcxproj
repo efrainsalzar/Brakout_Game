@@ -26,7 +26,7 @@
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Movimiento.cpp" />
-    <ClCompile Include="Panddle.cpp" />
+    <ClCompile Include="Paddle.cpp" />
     <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="UIManager.cpp" />
     <ClCompile Include="Window.cpp" />
@@ -38,7 +38,7 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Movimiento.h" />
-    <ClInclude Include="Panddle.h" />
+    <ClInclude Include="Paddle.h" />
     <ClInclude Include="TextureManager.h" />
     <ClInclude Include="UIManager.h" />
     <ClInclude Include="Window.h" />
