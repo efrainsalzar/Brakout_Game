@@ -3,7 +3,7 @@
 bool CollisionManager::checkCollision(const GameObject* a, const GameObject* b) {
 	if (a->getX() + a->getWidth() > b->getX() && a->getX() < b->getX() + b->getWidth() &&
 		a->getY() + a->getHeight() > b->getY() && a->getY() < b->getY() + b->getHeight()) {
-		/*ball->rebote(Direccion::DIAGONAL_ABAJO_DERECHA, Ball::Choque::ABAJO);*/
+		//std::cout << " colision" << std::endl;
 		return true;
 	}
 	return false;
@@ -11,7 +11,16 @@ bool CollisionManager::checkCollision(const GameObject* a, const GameObject* b) 
 }
 
 void CollisionManager::handleCollision(const GameObject* a, const GameObject* b) {
-	//Movimiento::Direccion dir1 = Movimiento::Direccion::DIAGONAL_ABAJO_DERECHA;
-	//Movimiento::ChoqueBorde dir2 = Movimiento::ChoqueBorde::ABAJO;
-	//movimiento->rebote(dir1, dir2);
+    Ball* ball = nullptr;
+    // Verificamos si la colisión es entre la pelota y el paddle
+    if (a->getName() == "ball" && b->getName() == "paddle") {
+        ball = (Ball*)a;  // Usamos casting para acceder al objeto Ball
+    }else{
+        ball = (Ball*)b;  // Usamos casting para acceder al objeto Ball
+    }
+    // Si se encontró un objeto Ball, llamamos a su método de colisión
+    if (ball != nullptr) {
+        ball->rebote(false, true);  // Llamamos al método específico de la Ball
+    }
 }
+

@@ -12,7 +12,7 @@ Ball::Ball() :
 		15,						// Ancho
 		15,						// Alto
 		{ 255, 255, 255, 255 }),// Color 
-	speed(3),
+	speed(4),
 	dirX(1),
 	dirY(-1),
 	reboteH(false),

@@ -18,6 +18,8 @@ private:
 
 	std::vector<GameObject*> gameObjects;
 
+	CollisionManager* collisionManager;
+
 public:
 	Game();
 	~Game();

@@ -32,6 +32,11 @@ void Game::handleEvents() {
 		if (event.type == SDL_QUIT) {
 			running = false;
 		}
+		if (event.type == SDL_KEYDOWN) {
+			if (event.key.keysym.sym == SDLK_ESCAPE) {
+				running = false;
+			}
+		}
 		//for (GameObject* obj : gameObjects) {
 		//	obj->handleInput(event);
 		//}
@@ -39,10 +44,19 @@ void Game::handleEvents() {
 }
 
 void Game::update() {
+	// actualizar objectos
 	for (GameObject* obj : gameObjects) {
 		obj->update();
 	}
 
+	// validar colisiones
+	for (size_t i = 0; i < gameObjects.size(); ++i) {
+		for (size_t j = i + 1; j < gameObjects.size(); ++j) {
+			if (collisionManager->checkCollision(gameObjects[i], gameObjects[j])) {
+				collisionManager->handleCollision(gameObjects[i], gameObjects[j]);
+			}
+		}
+	}
 }
 
 void Game::render() {

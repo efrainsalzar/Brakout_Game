@@ -20,7 +20,8 @@ public:
 
 	void update() override;
 	void render(SDL_Renderer* _renderer) override;
-	void handleInput(SDL_Event& _event) override {};
+	void handleInput(SDL_Event& _event) override {}
+	std::string getName() const override { return "ball"; };
 
 	void rebote(bool _invertX, bool _invertY);
 };

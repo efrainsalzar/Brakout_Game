@@ -5,7 +5,7 @@
 class GameObject
 {
 private:
-	
+
 protected:
 	SDL_Rect* bodyObject;
 	SDL_Renderer* renderer;
@@ -24,8 +24,10 @@ public:
 	virtual void update() = 0;
 	virtual void render(SDL_Renderer* _renderer) = 0;
 	virtual void handleInput(SDL_Event& _event) = 0;
+	virtual std::string getName() const = 0;
 
 	//Metodo de acceso
+	SDL_Rect* getBody() const { return bodyObject; }
 	int getX() const { return bodyObject->x; }
 	int getY() const { return bodyObject->y; }
 	int getWidth() const { return bodyObject->w; }
