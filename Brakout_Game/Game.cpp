@@ -42,6 +42,7 @@ void Game::update() {
 	for (GameObject* obj : gameObjects) {
 		obj->update();
 	}
+
 }
 
 void Game::render() {
