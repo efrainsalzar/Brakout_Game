@@ -1,12 +1,11 @@
 #pragma once
 #include "GameObject.h" // Asegúrate de que esta clase esté definida correctamente
 #include <iostream>
-#include "Paddle.h"
 #include "Ball.h"
 class CollisionManager
 {
 private:
-    
+    static bool isColision;
 public:
 
     // Método estático para verificar la colisión entre dos objetos
@@ -16,8 +15,8 @@ public:
      static void handleCollision(const GameObject* a, const GameObject* b);
 
 
-     void collisionBall_Paddle();
-     void collisionBall_Brick();
-
+     static bool isCollision();
+     static void resetCollision();
+     static void setCollision( bool _isColision);
 };
 

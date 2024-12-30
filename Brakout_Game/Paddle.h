@@ -24,5 +24,7 @@ public:
     void render(SDL_Renderer* _renderer) override;         // Dibuja la barra en pantalla
     void handleInput(SDL_Event& _event) override;
     std::string getName() const override { return "paddle"; };
+
+    Side getCollisionSide(const SDL_Rect* other) const override;
 };
 

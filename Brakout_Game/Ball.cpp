@@ -7,16 +7,17 @@ Ball::Ball(int _x, int _y, int _width, int _height, int _speed, SDL_Color _color
 }
 
 Ball::Ball() :
-	GameObject(400,				// Posición x
-		300,					// Posición y
+	GameObject(200,				// Posición x
+		200,					// Posición y
 		15,						// Ancho
 		15,						// Alto
 		{ 255, 255, 255, 255 }),// Color 
-	speed(4),
+	speed(2),
 	dirX(1),
 	dirY(-1),
 	reboteH(false),
-	reboteV(false)
+	reboteV(false),
+	banderaColision(false)
 {
 	movimiento = new Movimiento(bodyObject);
 }
@@ -29,11 +30,15 @@ Ball::~Ball() {
 void Ball::update() {
 
 	movimiento->moverBall(dirX, dirY, speed);
-
-
 	movimiento->validarLimitesBall(reboteH, reboteV);
 
-	rebote(reboteH, reboteV);
+	if (reboteH) {
+		rebote(Side::LEFT);  // Llamar con Side::LEFT para el rebote horizontal
+	}
+	if (reboteV) {
+		rebote(Side::TOP);  // Llamar con Side::TOP para el rebote vertical
+	}
+
 }
 
 void Ball::render(SDL_Renderer* _renderer) {
@@ -42,11 +47,22 @@ void Ball::render(SDL_Renderer* _renderer) {
 	SDL_RenderFillRect(_renderer, bodyObject); // Dibuja el rectángulo
 }
 
-void Ball::rebote(bool _invertX, bool _invertY) {
-	if (_invertX) {
-		dirX = -dirX; // Cambiar dirección horizontal
+void Ball::rebote(Side side) {
+
+	switch (side) {
+	case Side::LEFT:
+	case Side::RIGHT:
+		dirX = -dirX;  // Cambiar la dirección horizontal cuando colisiona con los lados
+		break;
+	case Side::TOP:
+	case Side::BOTTOM:
+		dirY = -dirY;  // Cambiar la dirección vertical cuando colisiona con la parte superior o inferior
+		break;
+	default:
+		break;
 	}
-	if (_invertY) {
-		dirY = -dirY; // Cambiar dirección vertical
-	}
+}
+
+GameObject::Side Ball::getCollisionSide(const SDL_Rect* other) const {
+	return Side::NONE;
 }
