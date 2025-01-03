@@ -33,16 +33,16 @@ public:
 	virtual void update() = 0;
 	virtual void render(SDL_Renderer* _renderer) = 0;
 	virtual void handleInput(SDL_Event& _event) = 0;
-	virtual std::string getName() const = 0;
-	virtual Side getCollisionSide(const SDL_Rect* other) const = 0;
+	virtual void handleCollision(Side* _side ) =0;
+	virtual bool getIsDestroyed() = 0;
 
 
 	//Metodo de acceso
-	SDL_Rect* getBody() const { return bodyObject; }
-	int getX() const { return bodyObject->x; }
-	int getY() const { return bodyObject->y; }
-	int getWidth() const { return bodyObject->w; }
-	int getHeight() const { return bodyObject->h; }
-	SDL_Color getColor() const { return color; }
+	SDL_Rect* getBody()  { return bodyObject; }
+	int getX()  { return bodyObject->x; }
+	int getY()  { return bodyObject->y; }
+	int getWidth()  { return bodyObject->w; }
+	int getHeight()  { return bodyObject->h; }
+	SDL_Color getColor()  { return color; }
 };
 

@@ -1,22 +1,30 @@
 #include "Ball.h"
 
 Ball::Ball(int _x, int _y, int _width, int _height, int _speed, SDL_Color _color) :
-	GameObject(_x, _y, _width, _height, _color)
+	GameObject(_x, _y, _width, _height, _color),
+	speed(_speed),
+	dirX(1),
+	dirY(-1),
+	reboteH(false),
+	reboteV(false),
+	isAttachedToPaddle(true),
+	banderaColision(false)
 {
 	movimiento = new Movimiento(bodyObject);
 }
 
 Ball::Ball() :
-	GameObject(200,				// Posición x
-		200,					// Posición y
-		15,						// Ancho
-		15,						// Alto
+	GameObject(300,				// Posición x
+		300,					// Posición y
+		10,						// Ancho
+		10,						// Alto
 		{ 255, 255, 255, 255 }),// Color 
 	speed(2),
 	dirX(1),
 	dirY(-1),
 	reboteH(false),
 	reboteV(false),
+	isAttachedToPaddle(true),
 	banderaColision(false)
 {
 	movimiento = new Movimiento(bodyObject);
@@ -28,6 +36,11 @@ Ball::~Ball() {
 }
 
 void Ball::update() {
+	if (isAttachedToPaddle) {
+		// Mantener la bola encima de la barra (posición ajustable)
+		movimiento->moverPaddle(currentKeyStates, 5);
+		return;
+	}
 
 	movimiento->moverBall(dirX, dirY, speed);
 	movimiento->validarLimitesBall(reboteH, reboteV);
@@ -47,6 +60,14 @@ void Ball::render(SDL_Renderer* _renderer) {
 	SDL_RenderFillRect(_renderer, bodyObject); // Dibuja el rectángulo
 }
 
+void Ball::handleInput(SDL_Event& _event)
+{
+	if (isAttachedToPaddle && _event.type == SDL_KEYDOWN && _event.key.keysym.sym == SDLK_SPACE) {
+		// Liberar la bola al presionar la barra espaciadora
+		isAttachedToPaddle = false;
+	}
+}
+
 void Ball::rebote(Side side) {
 
 	switch (side) {
@@ -63,6 +84,16 @@ void Ball::rebote(Side side) {
 	}
 }
 
-GameObject::Side Ball::getCollisionSide(const SDL_Rect* other) const {
-	return Side::NONE;
+void Ball::handleCollision(Side* _side)
+{
+	//_side = nullptr;
+	rebote(*_side);
+}
+
+void Ball::attachToPaddle(GameObject* paddle)
+{
+	// Ajustar la posición de la bola para que quede encima de la barra
+	bodyObject->x = paddle->getX() + (paddle->getWidth() - getWidth()) / 2;
+	bodyObject->y = paddle->getY() - getHeight();
+	isAttachedToPaddle = true;
 }

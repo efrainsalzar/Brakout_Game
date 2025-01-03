@@ -48,6 +48,9 @@
     <ClCompile Include="Movimiento.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="BrickFactory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -78,6 +81,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Movimiento.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BrickFactory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

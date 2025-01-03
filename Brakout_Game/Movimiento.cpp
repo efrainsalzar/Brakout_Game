@@ -50,9 +50,9 @@ void Movimiento::validarLimitesBall(bool& _bordeH, bool& _bordeV) {
 		_bordeV = true;
 	}
 	// Límite inferior
-	if (bodyObject->y + bodyObject->h > window->getScreenHeight()) {
-		bodyObject->y = window->getScreenHeight() - bodyObject->h;
-		_bordeV = true;
+	if (bodyObject->y + bodyObject->h > window->getScreenHeight()) {		
+		std::cout << "Game Over" << std::endl;
+		exit(0); // Termina el juego
 	}
 }
 

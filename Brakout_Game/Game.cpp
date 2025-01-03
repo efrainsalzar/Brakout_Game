@@ -17,9 +17,17 @@ bool Game::init() {
 		std::cerr << "Error al inicializar la ventana" << std::endl;
 		return false;
 	}
-	// Agregamos lo objetos a nuestro vector
-	gameObjects.push_back(new Paddle());
-	gameObjects.push_back(new Ball());
+
+	paddle = new Paddle();
+	gameObjects.push_back(paddle);
+
+	// Crear la bola, adjuntarla al Paddle y agregarla a los objetos del juego
+	Ball* ball = new Ball();
+	ball->attachToPaddle(paddle); // Adjuntar la bola al Paddle
+	gameObjects.push_back(ball);  // Agregar la bola a los objetos del juego
+
+	// Crear ladrillos usando BrickFactory y agregarlos a gameObjects
+	BrickFactory::createBricks(gameObjects);
 
 
 	running = true;
@@ -37,9 +45,9 @@ void Game::handleEvents() {
 				running = false;
 			}
 		}
-		//for (GameObject* obj : gameObjects) {
-		//	obj->handleInput(event);
-		//}
+		for (GameObject* obj : gameObjects) {
+			obj->handleInput(event);
+		}
 	}
 }
 
@@ -55,6 +63,16 @@ void Game::update() {
 			if (collisionManager->checkCollision(gameObjects[i], gameObjects[j])) {
 				collisionManager->handleCollision(gameObjects[i], gameObjects[j]);
 			}
+		}
+	}
+
+	for (auto it = gameObjects.begin(); it != gameObjects.end(); ) {
+		if ((*it)->getIsDestroyed()) {
+			delete* it;  // Elimina el objeto
+			it = gameObjects.erase(it);  // Elimina el objeto de la lista
+		}
+		else {
+			++it;
 		}
 	}
 }

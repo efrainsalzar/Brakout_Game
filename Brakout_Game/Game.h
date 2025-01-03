@@ -5,6 +5,8 @@
 #include "Paddle.h"
 #include "Ball.h"
 #include "Brick.h"
+#include "BrickFactory.h"
+
 #include "CollisionManager.h"
 
 #include <vector>
@@ -12,6 +14,7 @@
 class Game
 {
 private:
+	Paddle* paddle;  // Referencia al Paddle
 	Window* window;
 	bool running;
 	SDL_Event event;

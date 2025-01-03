@@ -14,6 +14,11 @@ private:
 	bool reboteV;
 	bool banderaColision;
 
+	bool isDestroyed;
+	bool isAttachedToPaddle;
+
+	const Uint8* currentKeyStates = SDL_GetKeyboardState(nullptr);
+
 public:
 	Ball(int _x, int _y, int _width, int _height, int  _speed, SDL_Color _color);
 	Ball();
@@ -21,17 +26,14 @@ public:
 
 	void update() override;
 	void render(SDL_Renderer* _renderer) override;
+	void handleInput(SDL_Event& _event) override;
+	void handleCollision(Side* _side) override;
+
+	void attachToPaddle(GameObject* paddle);
+
 	void rebote(Side side);
-
-
-
-	void handleInput(SDL_Event& _event) override {}
-	std::string getName() const override { return "ball"; };
-
-	GameObject::Side getCollisionSide(const SDL_Rect* other) const override;
-
 	bool isCollision() const { return banderaColision; };
 	void setCollision(bool _collision) { banderaColision = _collision; }
 
-
+	bool getIsDestroyed() override { return isDestroyed; }
 };

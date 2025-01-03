@@ -10,7 +10,7 @@ Paddle::Paddle(int _x, int _y, int _width, int _height, SDL_Color _color, int _s
 
 Paddle::Paddle():
     GameObject(400,         // Posición en X
-    500,                    // Posición en Y
+    550,                    // Posición en Y
     100,                    // Ancho
     10,                     // Alto
     { 42, 255, 100, 255 }), // Color (RGBA)
@@ -50,7 +50,6 @@ void Paddle::handleInput(SDL_Event& _event) {
     //}
 }
 
-GameObject::Side Paddle::getCollisionSide(const SDL_Rect* other) const {
-
-    return Side::NONE;
+void Paddle::handleCollision(Side* _side)
+{
 }

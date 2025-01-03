@@ -18,7 +18,7 @@ Window::Window() :
 	window(nullptr),
 	renderer(nullptr),
 	title("Breackout"),
-	screenWidth(800),
+	screenWidth(808),
 	screenHeight(600) {
 	std::cout << "Window constructor called s/n parents" << std::endl;
 	instance = this;
